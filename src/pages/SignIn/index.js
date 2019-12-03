@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import {
-  Text, TextInput, ScrollView, View, TouchableOpacity, StyleSheet,
+  Text, TextInput, ScrollView, View, SafeAreaView, StyleSheet,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { useNavigation } from '@react-navigation/core';
+
+import Button from '../../components/Button';
 
 export default function SignIn() {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -14,65 +16,71 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
-  function navigateToSignIn() {
-    navigation.navigate('Home');
+  function navigateToDashboard() {
+    navigation.navigate('Dashboard');
   }
 
   function toggleSecurityEntry() {
     setSecureTextEntry(!secureTextEntry);
   }
 
-  TextInput.defaultProps.selectionColor = 'white';
+  function handleUsernameFocus() {
+    setUsernameFocused(true);
+    setPasswordFocused(false);
+  }
+
+  function handlePasswordFocus() {
+    setUsernameFocused(false);
+    setPasswordFocused(true);
+  }
 
   const noFocusStyle = [styles.passwordContainer, styles.input, styles.noFocusInput];
   const focusStyle = [styles.passwordContainer, styles.input];
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
         <Text style={styles.topText}>Entrar</Text>
         <ScrollView style={styles.formContainer}>
-          <Text onPress={navigateToSignIn} style={styles.inputText}>Usuário</Text>
+          <Text style={styles.inputText}>Usuário</Text>
           <TextInput
             style={usernameFocused ? styles.input : [styles.input, styles.noFocusInput]}
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
             autoFocus
-            onFocus={() => setUsernameFocused(true)}
-            onBlur={() => setUsernameFocused(false)}
+            onFocus={handleUsernameFocus}
             value={username}
             onChangeText={setUsername}
+            selectionColor="#9046ff"
           />
-          <Text onPress={navigateToSignIn} style={styles.inputText}>Senha</Text>
+          <Text style={styles.inputText}>Senha</Text>
           <View style={passwordFocused ? focusStyle : noFocusStyle}>
             <TextInput
               style={styles.passwordInput}
               secureTextEntry={secureTextEntry}
               autoCapitalize="none"
               autoCorrect={false}
-              onFocus={() => setPasswordFocused(true)}
-              onBlur={() => setPasswordFocused(false)}
+              onFocus={handlePasswordFocus}
               value={password}
               onChangeText={setPassword}
+              selectionColor="#9046ff"
             />
-            <Icon name={secureTextEntry ? 'eye' : 'eye-off'} onPress={toggleSecurityEntry} size={20} color="#282828" />
+            <Icon name={secureTextEntry ? 'eye' : 'eye-off'} onPress={toggleSecurityEntry} size={20} color="#616161" />
           </View>
           <Text style={styles.problemsText}>Problemas ao efetuar login?</Text>
-          <TouchableOpacity onPress={() => { }} style={username && password ? styles.button : [styles.button, styles.buttonDisabled]}>
-            <Text style={username && password ? styles.buttonText : [styles.buttonText, styles.buttonTextDisabled]}>Entrar</Text>
-          </TouchableOpacity>
+          <Button buttonText="Entrar" disabled={!(username && password)} onPress={navigateToDashboard} />
         </ScrollView>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#fff',
   },
   wrapper: {
     width: '80%',
@@ -82,8 +90,8 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1.5,
-    borderColor: '#9147ff',
-    paddingHorizontal: 20,
+    borderColor: '#9046ff',
+    paddingHorizontal: 10,
     fontSize: 16,
     color: '#444',
     height: 40,
@@ -101,9 +109,8 @@ const styles = StyleSheet.create({
   },
 
   noFocusInput: {
-    borderWidth: 1.5,
-    borderColor: '#ddd',
-    backgroundColor: '#ddd',
+    borderColor: '#ededed',
+    backgroundColor: '#ededed',
   },
 
   passwordContainer: {
@@ -111,38 +118,22 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  button: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9147ff',
-    borderRadius: 3,
-    height: 26,
-    margin: 5,
-  },
-  buttonDisabled: {
-    backgroundColor: '#ddd',
-  },
+
   problemsText: {
-    color: '#9147ff',
+    color: '#9046ff',
     fontSize: 11,
   },
-  buttonText: {
-    color: '#fff',
-    fontSize: 11,
-    fontWeight: 'bold',
-  },
-  buttonTextDisabled: {
-    color: '#999',
-  },
+
   topText: {
     color: '#282828',
     fontSize: 14,
     marginTop: 15,
     fontWeight: 'bold',
   },
+
   inputText: {
     color: '#282828',
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: 'bold',
   },
 });

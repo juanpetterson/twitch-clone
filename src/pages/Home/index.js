@@ -1,9 +1,11 @@
 import React from 'react';
 import {
-  Text, TouchableOpacity, View, StyleSheet,
+  Text, SafeAreaView, View, StyleSheet,
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/core';
+
+import Button from '../../components/Button';
 
 export default function Home() {
   const navigation = useNavigation();
@@ -13,17 +15,15 @@ export default function Home() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Boas-vindas à</Text>
-      <Text style={[styles.title, styles.titleMargin]}>Twitch</Text>
-      <TouchableOpacity style={styles.button} title="navigate to Home" onPress={navigateToSignIn}>
-        <Text style={styles.buttonText}>Entrar</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[styles.button, styles.signUpButton]} title="navigate to Home" onPress={navigateToSignIn}>
-        <Text style={[styles.buttonText, styles.signUpButtonText]}>Cadastrar-se</Text>
-      </TouchableOpacity>
-      <Text style={styles.ignoreText}>Ignorar</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.wrapper}>
+        <Text style={styles.title}>Boas-vindas à</Text>
+        <Text style={[styles.title, styles.titleMargin]}>Twitch</Text>
+        <Button onPress={navigateToSignIn} buttonText="Entrar" />
+        <Button buttonText="Cadastrar-se" textColor="#282828" disabled />
+        <Text style={styles.ignoreText}>Ignorar</Text>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -32,38 +32,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  wrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '80%',
   },
   title: {
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: 'bold',
   },
   titleMargin: {
     marginBottom: 20,
   },
-  button: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9147ff',
-    borderRadius: 3,
-    height: 26,
-    width: '80%',
-    margin: 5,
-  },
-  signUpButton: {
-    backgroundColor: '#ddd',
-    color: '#282828',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 10,
-    fontWeight: 'bold',
-  },
-  signUpButtonText: {
-    color: '#282828',
-  },
   ignoreText: {
     color: '#9147ff',
-    fontSize: 10,
+    fontSize: 11,
     marginTop: 30,
     fontWeight: 'bold',
   },
