@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 26,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
   },
   titleMargin: {
     marginBottom: 20,
@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
     color: '#9147ff',
     fontSize: 11,
     marginTop: 30,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
   },
 });

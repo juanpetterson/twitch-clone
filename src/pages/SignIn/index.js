@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   Text, TextInput, ScrollView, View, SafeAreaView, StyleSheet,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { useNavigation } from '@react-navigation/core';
 
@@ -66,7 +66,7 @@ export default function SignIn() {
               onChangeText={setPassword}
               selectionColor="#9046ff"
             />
-            <Icon name={secureTextEntry ? 'eye' : 'eye-off'} onPress={toggleSecurityEntry} size={20} color="#616161" />
+            <Icon name={secureTextEntry ? 'eye-outline' : 'eye-off-outline'} onPress={toggleSecurityEntry} size={20} color="#616161" />
           </View>
           <Text style={styles.problemsText}>Problemas ao efetuar login?</Text>
           <Button buttonText="Entrar" disabled={!(username && password)} onPress={navigateToDashboard} />
@@ -122,18 +122,19 @@ const styles = StyleSheet.create({
   problemsText: {
     color: '#9046ff',
     fontSize: 11,
+    fontFamily: 'Montserrat-Medium',
   },
 
   topText: {
     color: '#282828',
     fontSize: 14,
     marginTop: 15,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
   },
 
   inputText: {
     color: '#282828',
     fontSize: 12,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
   },
 });

@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 12,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
   },
 
   signUpButtonText: {
