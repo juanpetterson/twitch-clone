@@ -20,6 +20,7 @@ function Routes() {
       <Stack.Screen
         name="Home"
         component={Home}
+        backBehavior="none"
       />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="Dashboard" component={DashboardRoutes} />
