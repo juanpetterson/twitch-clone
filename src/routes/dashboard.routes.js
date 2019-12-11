@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
     width: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 45,
   },
   text: {
     fontSize: 10,
